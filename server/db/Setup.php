@@ -14,9 +14,10 @@ class Setup
     public static function createTable(PDO $pdo)
     {
         $query = "CREATE TABLE IF NOT EXISTS tasks (
-            id INT AUTO_INCREMENT PRIMARY_KEY,
+            id INT AUTO_INCREMENT,
             description VARCHAR(500) NOT NULL,
-            done BOOLEAN NOT NULL DEFAULT 0
+            done BOOLEAN NOT NULL DEFAULT 0,
+            PRIMARY KEY (id)
         )";
         $pdo->exec($query);
 

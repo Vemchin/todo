@@ -34,10 +34,10 @@ class TaskPDO
         $sql = "SELECT id, description, done FROM tasks WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->execute([ 'id' => $id]);
+        $stmt->execute(['id' => $id]);
         $task = $stmt->fetch();
 
-        
+
         return $task ? new Task($task['description'], $task['done']) : null;
     }
 
