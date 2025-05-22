@@ -3,7 +3,7 @@ require_once('./server/services/TaskService.php');
 
 $service = new TaskService();
 
-$tasks = [];
+$tasks = $service->getALL();
 ?>
 
 <!DOCTYPE html>
@@ -21,21 +21,44 @@ $tasks = [];
 
   <div class="container">
     <div class="todo-app">
-      <!-- App -->
-      <h2>ToDo List <img src="img/icon.png"></h2>
-      <form method="post" class="row">
-        <input type="text" name="task"; id="input-box" placeholder="Add your text">
+      <!-- Error -->
+      <?php if (isset($_COOKIE['error'])): ?>
+        <div class="error-card"></div>
+        <div class="error-icon">!</div>
+        <div class="error-message">
+          <strong>Error:<strong> <?= $_COOKIE['error']; ?>
+        </div>
+    </div>
+    <?php unset($_COOKIE['error']); ?>
+  <?php endif; ?>
 
-        <button type="submit" formaction="./server/operations/add.php">Add</button>
+
+  <!-- App -->
+  <h2>ToDo List <img src="img/icon.png"></h2>
+  <form method="post" class="row">
+    <input type="text" name="task" ; id="input-box" placeholder="Add your text">
+
+    <button type="submit" formaction="./server/operations/add.php">Add</button>
+  </form>
+
+  <!-- Task container -->
+  <ul id="list-container">
+    <?php foreach ($tasks as $task): ?>
+      <form method="post">
+        <li>
+          <p> <?= $task['description'] ?> </p>
+        </li>
+
+        <button type="submit" formaction="./server/operations/Delete.php">
+          <span>&#x00D7</span>
+        </button>
       </form>
-
-      <!-- Task container -->
-      <ul id="list-container">
-        <!-- <li class="checked">Task 1</li>
+    <?php endforeach; ?>
+    <!-- <li class="checked">Task 1</li>
         <li>Task 2</li>
         <li>Task 3</li> -->
-      </ul>
-    </div>
+  </ul>
+  </div>
   </div>
 
   <script src="script.js"></script>

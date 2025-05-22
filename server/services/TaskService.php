@@ -34,6 +34,11 @@ class TaskService
         $this->taskPDO->create($task);
     }
 
+    public function getALL(): array
+    {
+        return $this->taskPDO->getALL();
+    }
+
     private function isDuplicated(array $tasks, Task $task): bool
     {
         $tasks = array_map(fn($t) => $t['description'], $tasks);
