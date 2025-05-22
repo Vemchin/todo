@@ -7,7 +7,7 @@ class TaskPDO
 
     public function __construct(PDO $pdo)
     {
-        $this->$pdo = $pdo;
+        $this->pdo = $pdo;
     }
 
     public function create(Task $task): void
@@ -23,7 +23,7 @@ class TaskPDO
 
     public function getAll(): array
     {
-        $sql = "SELECT id, description, done FROM task";
+        $sql = "SELECT id, description, done FROM tasks";
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll();

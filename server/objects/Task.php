@@ -3,7 +3,7 @@ class Task
 {
     public ?int $id = null;
     public string $description;
-    public bool $done = 0;
+    public int $done;
 
     public function __construct(string $description, int $done, ?int $id = null)
     {
